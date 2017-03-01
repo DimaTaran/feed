@@ -19,7 +19,7 @@ include_once 'lib/db_connect.php';
 </head>
 <body>
 
-
+<h2>Posts</h2>
 <table class="table"">
     <tr>
     <th>ID</th>
@@ -45,6 +45,33 @@ echo '</tr>';}
 
     </tr>
 </table>
+<h2>Comments</h2>
+<table class="table"">
+<tr>
+    <th>ID</th>
+    <th>ID поста</th>
+    <th>Текст</th>
+
+</tr>
+<?php
+$query = mysqli_query($connect, "select * from comments");
+
+
+while ($comments = mysqli_fetch_object($query))
+
+{ echo '<tr>';
+//var_dump($posts);
+    echo '<td>', $comments->id, '</td>';
+    echo '<td>', $comments->post_id, '</td>';
+    echo '<td>', $comments->content, '</td>';
+
+    echo '</tr>';}
+?>
+<tr>
+
+</tr>
+</table>
+
 </body>
 </html>
 

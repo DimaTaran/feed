@@ -22,12 +22,26 @@ include_once 'lib/db_connect.php';
 <body><?php
 $query = mysqli_query($connect, "select * from post WHERE id={$_GET['id']} LIMIT 1");
 $post = mysqli_fetch_object($query);
+$query2 = mysqli_query($connect, "select * from comments");
+$comments = mysqli_fetch_object($query2);
 
 echo '<h1>', $post->title ,  '</h1>';
 echo '<p>', $post->discription ,  '</p>';
 echo "<a href='/'>назад</a>";
 ?>
 
+<h2>Comments</h2>
+<?php
 
+
+    while ($comments = mysqli_fetch_object($query2)) {
+        if ($post->id == $comments->post_id) {
+//            var_dump($comments);
+            echo '<p>', $comments->content, '</p>';
+
+        } else
+            echo "There are no comments in this post";
+    }
+?>
 </body>
 </html>
